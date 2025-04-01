@@ -24,6 +24,7 @@ import { createTravelPlan } from '../utils/api';
 import apiConfig from '../config';
 import MapIcon from '@mui/icons-material/Map';
 import ItineraryMap from '../components/ItineraryMap';
+import TravelServices from '../components/TravelServices';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -260,23 +261,31 @@ function PlannerPage() {
         )}
 
         {result && (
-          <Paper elevation={3} sx={{ p: 3 }}>
+          <Paper elevation={3} sx={{ p: 3, mt: 4 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-              <Typography variant="h4">
+              <Typography variant="h5" component="h2" gutterBottom>
                 Your Personalized Travel Plan
               </Typography>
-              <Tooltip title="View itinerary on map">
-                <IconButton 
-                  color="primary" 
-                  onClick={handleOpenMap}
-                  aria-label="View on map"
-                >
-                  <MapIcon />
-                </IconButton>
-              </Tooltip>
+              <Box>
+                <Tooltip title="View on Map">
+                  <IconButton color="primary" onClick={handleOpenMap}>
+                    <MapIcon />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             </Box>
-            <Box className="markdown-content">
-              <ReactMarkdown>{result}</ReactMarkdown>
+            <ReactMarkdown>{result}</ReactMarkdown>
+            <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-start' }}>
+              <TravelServices itinerary={result} destination={formData.destination} />
+              <Button 
+                variant="outlined"
+                color="primary"
+                onClick={handleOpenMap}
+                startIcon={<MapIcon />}
+                sx={{ mt: 2 }}
+              >
+                View on Map
+              </Button>
             </Box>
             
             {/* Map Dialog */}
