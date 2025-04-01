@@ -47,30 +47,96 @@ body {
 .leaflet-container {
   border-radius: 4px;
   border: 1px solid #ddd;
+  z-index: 1;
 }
 
+/* Map marker styling */
 .day-marker {
+  background-color: transparent;
+  border: none;
+}
+
+.day-marker-inner {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
+  background-color: #1976d2;
+  color: white;
   font-weight: bold;
-}
-
-.day-marker div {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 13px;
+  font-size: 14px;
+  border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+  transition: all 0.2s ease;
 }
 
+.day-marker-inner.active {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #e91e63;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  border: 3px solid white;
+  z-index: 1000;
+}
+
+.day-marker-inner:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4);
+}
+
+/* Popup styling */
 .leaflet-popup-content {
-  margin: 10px 12px;
+  margin: 13px 13px;
   line-height: 1.5;
 }
 
+.leaflet-popup-content p {
+  margin: 10px 0;
+}
+
+/* Media queries for responsive markers */
 @media (max-width: 768px) {
-  .main-content {
-    padding: 10px;
+  .day-marker-inner {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
   }
+  
+  .day-marker-inner.active {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+/* Add animation for markers */
+.leaflet-marker-icon {
+  transition: transform 0.3s ease;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.2);
+  z-index: 1000 !important;
+}
+
+/* Polyline style */
+.leaflet-interactive {
+  outline: none;
+}
+
+/* Day navigation styling */
+.MuiTabs-indicator {
+  height: 3px;
+}
+
+/* Itinerary list styles */
+.MuiListItem-root.Mui-selected {
+  background-color: rgba(25, 118, 210, 0.08);
+}
+
+.MuiListItem-root:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 } 
